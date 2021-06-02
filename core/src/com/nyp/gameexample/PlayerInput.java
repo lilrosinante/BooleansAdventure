@@ -14,16 +14,16 @@ public class PlayerInput extends InputAdapter {
     public boolean keyDown(int keyCode){
 
         if (keyCode == Keys.UP){
-            player.move(0, 1);
-        }
-        if (keyCode == Keys.DOWN){
-            player.move(0, -1);
-        }
-        if (keyCode == Keys.LEFT){
             player.move(-1, 0);
         }
-        if (keyCode == Keys.RIGHT){
+        if (keyCode == Keys.DOWN){
             player.move(1, 0);
+        }
+        if (keyCode == Keys.LEFT){
+            player.move(0, -1);
+        }
+        if (keyCode == Keys.RIGHT){
+            player.move(0, 1);
         }
 
         return false;

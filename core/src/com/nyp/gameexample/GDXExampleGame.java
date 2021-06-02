@@ -14,10 +14,7 @@ public class GDXExampleGame extends Game {
 	private Player player;
 	private Texture character;
 	SpriteBatch batch;
-	Texture playerStandingSouth;
 	PlayerInput playerInput;
-	private int x;
-	private int y;
 	
 	@Override
 	public void create () {
@@ -29,7 +26,7 @@ public class GDXExampleGame extends Game {
 
 	@Override
 	public void render () {
-		ScreenUtils.clear(1f, 0f, 0f, 1f);
+		ScreenUtils.clear(0f, 0f, 0f, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		Gdx.input.setInputProcessor(playerInput);
