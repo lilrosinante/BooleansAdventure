@@ -13,11 +13,13 @@ public class GDXExampleGame extends Game {
 
 	private Player player;
 	private Texture character;
+	private Camera camera;
 	SpriteBatch batch;
 	PlayerInput playerInput;
 	
 	@Override
 	public void create () {
+		camera = new Camera();
 		batch = new SpriteBatch();
 		character = new Texture("Character/brendan_stand_south.png");
 		player = new Player(1, 1);
@@ -28,9 +30,18 @@ public class GDXExampleGame extends Game {
 	public void render () {
 		ScreenUtils.clear(0f, 0f, 0f, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		camera.update(player.getX(), player.getY());
+
+		float worldStartX = Gdx.graphics.getWidth() / 2 - camera.getCameraX() * Settings.SCALED_TILE_SIZE;
+		float worldStartY = Gdx.graphics.getHeight() / 2 - camera.getCameraY() * Settings.SCALED_TILE_SIZE;
+
 		batch.begin();
 		Gdx.input.setInputProcessor(playerInput);
-		batch.draw(character, player.getX()*Settings.SCALED_TILE_SIZE, player.getY()*Settings.SCALED_TILE_SIZE, Settings.SCALED_TILE_SIZE, Settings.SCALED_TILE_SIZE*1.5f);
+		batch.draw(character,
+				worldStartX + player.getX()*Settings.SCALED_TILE_SIZE,
+				worldStartY + player.getY()*Settings.SCALED_TILE_SIZE,
+				Settings.SCALED_TILE_SIZE,
+				Settings.SCALED_TILE_SIZE*1.5f);
 		batch.end();
 	}
 	
