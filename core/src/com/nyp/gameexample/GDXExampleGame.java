@@ -37,10 +37,10 @@ public class GDXExampleGame extends Game {
 		player.update(Gdx.graphics.getDeltaTime());
 		ScreenUtils.clear(0f, 0f, 0f, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		camera.update(player.getWorldX(), player.getWorldY());
+		camera.update(player.getX() + 0.5f, player.getY() + 0.5f);
 
-		float worldStartX = Gdx.graphics.getWidth() / 2 - camera.getCameraX() * Settings.SCALED_TILE_SIZE;
-		float worldStartY = Gdx.graphics.getHeight() / 2 - camera.getCameraY() * Settings.SCALED_TILE_SIZE;
+		float worldStartX = Gdx.graphics.getWidth() / 2f - camera.getCameraX() * Settings.SCALED_TILE_SIZE;
+		float worldStartY = Gdx.graphics.getHeight() / 2f - camera.getCameraY() * Settings.SCALED_TILE_SIZE;
 
 		batch.begin();
 
@@ -52,14 +52,14 @@ public class GDXExampleGame extends Game {
 				} else {
 					render = grass2;
 				}
-				batch.draw(render, x*Settings.SCALED_TILE_SIZE, y*Settings.SCALED_TILE_SIZE, Settings.SCALED_TILE_SIZE, Settings.SCALED_TILE_SIZE);
+				batch.draw(render, worldStartX+x*Settings.SCALED_TILE_SIZE, worldStartY+y*Settings.SCALED_TILE_SIZE, Settings.SCALED_TILE_SIZE, Settings.SCALED_TILE_SIZE);
 			}
 		}
 
 		Gdx.input.setInputProcessor(playerInput);
 		batch.draw(character,
-				worldStartX + player.getWorldX()*Settings.SCALED_TILE_SIZE,
-				worldStartY + player.getWorldY()*Settings.SCALED_TILE_SIZE,
+				worldStartX + player.getX()*Settings.SCALED_TILE_SIZE,
+				worldStartY + player.getY()*Settings.SCALED_TILE_SIZE,
 				Settings.SCALED_TILE_SIZE,
 				Settings.SCALED_TILE_SIZE*1.5f);
 		batch.end();

@@ -9,7 +9,7 @@ public class Player {
     private int srcX, srcY;
     private int destX, destY;
     private float animationTimer;
-    private float ANIMATION_TIME = 0.5f;
+    private float ANIMATION_TIME = 0.2f;
     private ACTOR_STATE state;
     private TileMap map;
     private int x;
@@ -38,8 +38,9 @@ public class Player {
         if (map.getTile(x + newX, y + newY).getPlayer() != null) {
             return false;
         }
-  
+
         initializeMove(x, y, newX, newY);
+
         map.getTile(x, y).setPlayer(null);
         x += newX;
         y += newY;
