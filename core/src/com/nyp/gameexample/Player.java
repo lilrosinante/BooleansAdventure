@@ -1,6 +1,7 @@
 package com.nyp.gameexample;
 
 import com.badlogic.gdx.math.Interpolation;
+import com.nyp.gameexample.ENUM.ACTOR_STATE;
 import com.nyp.gameexample.model.TileMap;
 
 public class Player {
@@ -51,8 +52,8 @@ public class Player {
     public void update(float delta){
         if(state == ACTOR_STATE.WALKING){
             animationTimer += delta;
-            worldX = Interpolation.pow2.apply(srcX, destX, animationTimer/ANIMATION_TIME);
-            worldY = Interpolation.pow2.apply(srcY, destY, animationTimer/ANIMATION_TIME);
+            worldX = Interpolation.linear.apply(srcX, destX, animationTimer/ANIMATION_TIME);
+            worldY = Interpolation.linear.apply(srcY, destY, animationTimer/ANIMATION_TIME);
             if (animationTimer > ANIMATION_TIME){
                 finishMove();
             }
@@ -62,8 +63,8 @@ public class Player {
     private void initializeMove(int oldX, int oldY, int newX, int newY){
         this.srcX = oldX;
         this.srcY = oldY;
-        this.destX = newX;
-        this.destY = newY;
+        this.destX = oldX+newX;
+        this.destY = oldY+newY;
         this.worldX = oldX;
         this.worldY = oldY;
         animationTimer = 0f;
