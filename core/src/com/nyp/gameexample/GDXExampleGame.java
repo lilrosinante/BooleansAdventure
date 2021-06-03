@@ -13,6 +13,7 @@ public class GDXExampleGame extends Game {
 
 	private Player player;
 	private Texture character;
+	private Camera camera;
 	private Texture grass1;
 	private Texture grass2;
 	private TileMap map;
@@ -21,6 +22,7 @@ public class GDXExampleGame extends Game {
 	
 	@Override
 	public void create () {
+		camera = new Camera();
 		batch = new SpriteBatch();
 		character = new Texture("Character/brendan_stand_south.png");
 		map = new TileMap(38, 23);
@@ -32,8 +34,14 @@ public class GDXExampleGame extends Game {
 
 	@Override
 	public void render () {
+		player.update(Gdx.graphics.getDeltaTime());
 		ScreenUtils.clear(0f, 0f, 0f, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		camera.update(player.getWorldX(), player.getWorldY());
+
+		float worldStartX = Gdx.graphics.getWidth() / 2 - camera.getCameraX() * Settings.SCALED_TILE_SIZE;
+		float worldStartY = Gdx.graphics.getHeight() / 2 - camera.getCameraY() * Settings.SCALED_TILE_SIZE;
+
 		batch.begin();
 
 		for ( int x = 0; x < map.getWidth(); x++) {
@@ -49,7 +57,11 @@ public class GDXExampleGame extends Game {
 		}
 
 		Gdx.input.setInputProcessor(playerInput);
-		batch.draw(character, player.getX()*Settings.SCALED_TILE_SIZE, player.getY()*Settings.SCALED_TILE_SIZE, Settings.SCALED_TILE_SIZE, Settings.SCALED_TILE_SIZE*1.5f);
+		batch.draw(character,
+				worldStartX + player.getWorldX()*Settings.SCALED_TILE_SIZE,
+				worldStartY + player.getWorldY()*Settings.SCALED_TILE_SIZE,
+				Settings.SCALED_TILE_SIZE,
+				Settings.SCALED_TILE_SIZE*1.5f);
 		batch.end();
 	}
 	
