@@ -37,7 +37,7 @@ public class GDXExampleGame extends Game {
 		player.update(Gdx.graphics.getDeltaTime());
 		ScreenUtils.clear(0f, 0f, 0f, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		camera.update(player.getX() + 0.5f, player.getY() + 0.5f);
+		camera.update(player.getWorldX() + 0.5f, player.getWorldY() + 0.5f);
 
 		float worldStartX = Gdx.graphics.getWidth() / 2f - camera.getCameraX() * Settings.SCALED_TILE_SIZE;
 		float worldStartY = Gdx.graphics.getHeight() / 2f - camera.getCameraY() * Settings.SCALED_TILE_SIZE;
@@ -58,8 +58,8 @@ public class GDXExampleGame extends Game {
 
 		Gdx.input.setInputProcessor(playerInput);
 		batch.draw(character,
-				worldStartX + player.getX()*Settings.SCALED_TILE_SIZE,
-				worldStartY + player.getY()*Settings.SCALED_TILE_SIZE,
+				worldStartX + player.getWorldX()*Settings.SCALED_TILE_SIZE,
+				worldStartY + player.getWorldY()*Settings.SCALED_TILE_SIZE,
 				Settings.SCALED_TILE_SIZE,
 				Settings.SCALED_TILE_SIZE*1.5f);
 		batch.end();

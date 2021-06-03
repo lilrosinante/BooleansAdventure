@@ -9,7 +9,7 @@ public class Player {
     private int srcX, srcY;
     private int destX, destY;
     private float animationTimer;
-    private float ANIMATION_TIME = 0.2f;
+    private float ANIMATION_TIME = 0.3f;
     private ACTOR_STATE state;
     private TileMap map;
     private int x;
@@ -21,8 +21,8 @@ public class Player {
         this.y = y;
         this.worldX = x;
         this.worldY = y;
-        this.state = ACTOR_STATE.STANDING;
         map.getTile(x, y).setPlayer(this);
+        this.state = ACTOR_STATE.STANDING;
     }
   
   public boolean move(int newX, int newY) {
@@ -62,10 +62,10 @@ public class Player {
     private void initializeMove(int oldX, int oldY, int newX, int newY){
         this.srcX = oldX;
         this.srcY = oldY;
-        this.destX = newX;
-        this.destY = newY;
-        this.worldX = oldX;
-        this.worldY = oldY;
+        this.destX = oldX+newX;
+        this.destY = oldY+newY;
+        this.worldX = newX;
+        this.worldY = newY;
         animationTimer = 0f;
         state = ACTOR_STATE.WALKING;
     }
@@ -76,6 +76,12 @@ public class Player {
 
     private void finishMove(){
         state = ACTOR_STATE.STANDING;
+        this.worldX = destX;
+        this.worldY = destY;
+        this.srcX = 0;
+        this.srcY = 0;
+        this.destX = 0;
+        this.destY = 0;
     }
 
     public float getWorldX() {
