@@ -1,4 +1,4 @@
-package com.nyp.gameexample;
+package com.nyp.gameexample.music;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
