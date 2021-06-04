@@ -34,8 +34,7 @@ public class GDXExampleGame extends Game {
         grass2 = new Texture("Grass/Pokemon_Grass_2.png");
         textureAtlas = new TextureAtlas("tilepack.atlas");
 
-        Sound sound = Gdx.audio.newSound(Gdx.files.internal("Sounds/background-music.mp3"));
-        sound.play();
+        SoundPlayer soundPlayer = new SoundPlayer();
 
         AnimationSet animations = new AnimationSet(
                 new Animation(0.3f / 2f, textureAtlas.findRegions("brendan_walk_north"), Animation.PlayMode.LOOP_PINGPONG),
@@ -50,6 +49,9 @@ public class GDXExampleGame extends Game {
 
         player = new Player(map, 1, 1, animations);
         playerInput = new PlayerInput(player);
+
+        soundPlayer.getPaletteTownTheme().setLooping(true);
+        soundPlayer.getPaletteTownTheme().play();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.nyp.gameexample;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.nyp.gameexample.ENUM.ACTOR_STATE;
@@ -21,6 +22,7 @@ public class Player {
     private DIRECTION facing;
     private boolean moveRequestThisFrame;
     private float walktimer;
+    private Sound sound;
 
     public Player(TileMap map, int x, int y, AnimationSet animations) {
         this.map = map;
@@ -32,6 +34,7 @@ public class Player {
         this.state = ACTOR_STATE.STANDING;
         map.getTile(x, y).setPlayer(this);
         facing = DIRECTION.SOUTH;
+        this.sound = sound;
     }
 
   public boolean move(int newX, int newY, DIRECTION direction) {
